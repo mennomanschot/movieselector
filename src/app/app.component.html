@@ -1,21 +1,43 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="mx-auto" style="max-width: 600px;">
+  <div class="row m-1">
+    <form class="form-inline">
+      <div class="form-group mr-sm-3 mb-2">
+        <label for="inputMovie" class="sr-only">movie name</label>
+        <input type="text" class="form-control" id="inputMovie" placeholder="Enter movie name" name="movieName" [(ngModel)]="movieName">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2" (click)="movieUrl()">find version</button>
+    </form>
+    <div>{{movieName}}</div>
 
+    <div class="btn-group ml-auto my-3" role="group" aria-label="toggles">
+      <button type="button" class="btn btn-secondary" [ngClass]="{'button-active': !hide90s}" (click)="toggle90s()">1990s</button>
+      <button type="button" class="btn btn-secondary" [ngClass]="{'button-active': !hide00s}" (click)="toggle00s()">2000s</button>
+    </div>
+
+  </div>
+
+  <div class="card mb-3 moviecard" [ngClass]="{'is-hidden': (hide00s && item.year.startsWith('20')) || (hide90s &&  item.year.startsWith('19')) }" *ngFor="let item of movies2">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="./assets/images/{{item.imdbID}}.jpg" class="card-img p-2" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{item.title}}</h5>
+          <hr>
+          <p class="card-text">
+            <span class="pg-label">{{item.rating}}</span>
+            <small class="text-muted ml-2">time: {{item.runtime}}</small>
+            <small class="text-muted float-right">{{item.year}}</small>
+          </p>
+          <p class="card-text">{{item.description}}</p>
+          <a type="button" class="btn btn-info btn-sm float-right mb-3" href="https://www.imdb.com/title/{{item.imdbID}}/" target="blank">view on IMDB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-info" role="alert" *ngIf="hide90s && hide00s">
+    Please select a movie period.
+  </div>
+</div>
 <router-outlet></router-outlet>
