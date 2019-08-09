@@ -1,25 +1,27 @@
 <div class="mx-auto" style="max-width: 600px;">
   <div class="row m-1">
-    <form class="form-inline">
-      <div class="form-group mr-sm-3 mb-2">
+
+    <!-- Work in progress >> adding an input variable to search database based on movie title  -->
+
+    <!-- <form class="form-inline">
+      <div class="form-group mr-3 mb-0">
         <label for="inputMovie" class="sr-only">movie name</label>
         <input type="text" class="form-control" id="inputMovie" placeholder="Enter movie name" name="movieName" [(ngModel)]="movieName">
       </div>
-      <button type="submit" class="btn btn-primary mb-2" (click)="movieUrl()">find version</button>
-    </form>
-    <div>{{movieName}}</div>
+      <button type="submit" class="btn btn-primary mb-0 float-right" (click)="newMovie()">find version</button>
+    </form> -->
 
     <div class="btn-group ml-auto my-3" role="group" aria-label="toggles">
-      <button type="button" class="btn btn-secondary" [ngClass]="{'button-active': !hide90s}" (click)="toggle90s()">1990s</button>
-      <button type="button" class="btn btn-secondary" [ngClass]="{'button-active': !hide00s}" (click)="toggle00s()">2000s</button>
+      <button type="button" class="btn btn-secondary btn-sm" [ngClass]="{'button-active': !hide90s}" (click)="toggle90s()">1990s</button>
+      <button type="button" class="btn btn-secondary btn-sm" [ngClass]="{'button-active': !hide00s}" (click)="toggle00s()">2000s</button>
     </div>
-
   </div>
 
-  <div class="card mb-3 moviecard" [ngClass]="{'is-hidden': (hide00s && item.year.startsWith('20')) || (hide90s &&  item.year.startsWith('19')) }" *ngFor="let item of movies2">
+  <div class="card mb-3 moviecard" [ngClass]="{'is-hidden': (hide00s && item.year.startsWith('20')) || (hide90s &&  item.year.startsWith('19')) }" *ngFor="let item of moviesDetails">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="./assets/images/{{item.imdbID}}.jpg" class="card-img p-2" alt="...">
+        <img src="./assets/images/{{item.imdbID}}.jpg" class="card-img p-2" alt="..."> <!--locally referenced poster images-->
+        <!-- <img src="{{item.posterUrl}}" class="card-img p-2" alt="..."> // hotlinked posterimage url part of the feature to change the moviename-->
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -31,7 +33,7 @@
             <small class="text-muted float-right">{{item.year}}</small>
           </p>
           <p class="card-text">{{item.description}}</p>
-          <a type="button" class="btn btn-info btn-sm float-right mb-3" href="https://www.imdb.com/title/{{item.imdbID}}/" target="blank">view on IMDB</a>
+          <a class="btn btn-info btn-sm float-right mb-3" href="https://www.imdb.com/title/{{item.imdbID}}/" target="blank">view on IMDB</a>
         </div>
       </div>
     </div>

@@ -11,47 +11,51 @@ import { MovieDetails } from './_models/movieDetails.model';
 })
 
 export class AppComponent implements OnInit {
-  findNewMovie: () => void;
   title = 'movieselector';
   apiResponse = [];
   movies = [];
-  movies2 = [];
+  moviesDetails = [];
   hide90s = false;
   hide00s = false;
   movieID: any;
   movieName: any = 'Batman';
-  url = 'http://www.omdbapi.com/?s=Batman&apikey=ee46de9e';
+
   movieUrl = () => `http://www.omdbapi.com/?s=${this.movieName}&apikey=ee46de9e`;
 
   toggle90s() {
     this.hide90s = !this.hide90s;
-    console.log('90s clicked');
     }
 
   toggle00s() {
     this.hide00s = !this.hide00s;
-    console.log('00s clicked');
     }
 
+constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    // this.movieUrl = () => `http://www.omdbapi.com/?s=${this.movieName}&apikey=ee46de9e`;
+  movieSearch() {
     this.http.get<MovieList>(this.movieUrl()).subscribe(data => {
-      this.movies = data.Search; // this.movies contains array of moviedata
-      this.movies.forEach((elem) => {
-        const movie = new Movie(elem); // creates movie objects of type Movie
-        console.log(movie.title + ' has ID: ' + movie.imdbID);
-        const movieID = movie.imdbID; // movieID contains imdbID of movie
+      this.movies = data.Search;        // this.movies contains array of moviedata
+      this.movies.forEach((elem) => {   // loop through moviedata, extract movieID's and construct url of moviedetails API
+        const movie = new Movie(elem);
+        const movieID = movie.imdbID;
         const movieDetailsUrl = () => `http://www.omdbapi.com/?i=${movieID}&apikey=ee46de9e`; // constructs api url of movieID
 
         this.http.get<MovieDetails>(movieDetailsUrl()).subscribe(detailDataResponse => {
           const movieDetails = new MovieDetails(detailDataResponse);
-          this.movies2.push(movieDetails);
+          console.log(movieDetails);
+          this.moviesDetails.push(movieDetails); // push moviedetails in array for the view.
         });
       });
-      console.log(this.movies2);
     });
+  }
+
+  newMovie() {                         // work in progress: bind var movieName to inputform, and update movieSearch() with new urls
+    console.log(this.movieName);
+    console.log(this.movieUrl());
+    this.movieSearch();
+  }
+
+  ngOnInit(): void {
+    this.movieSearch();
   }
 }
