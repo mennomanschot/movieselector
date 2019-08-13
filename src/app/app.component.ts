@@ -42,16 +42,17 @@ constructor(private http: HttpClient) {}
 
         this.http.get<MovieDetails>(movieDetailsUrl()).subscribe(detailDataResponse => {
           const movieDetails = new MovieDetails(detailDataResponse);
-          console.log(movieDetails);
           this.moviesDetails.push(movieDetails); // push moviedetails in array for the view.
         });
       });
+      console.log(this.moviesDetails);
     });
   }
 
   newMovie() {                         // work in progress: bind var movieName to inputform, and update movieSearch() with new urls
     console.log(this.movieName);
     console.log(this.movieUrl());
+    this.moviesDetails = [];
     this.movieSearch();
   }
 

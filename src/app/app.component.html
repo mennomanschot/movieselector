@@ -3,13 +3,13 @@
 
     <!-- Work in progress >> adding an input variable to search database based on movie title  -->
 
-    <!-- <form class="form-inline">
+    <form class="form-inline">
       <div class="form-group mr-3 mb-0">
         <label for="inputMovie" class="sr-only">movie name</label>
         <input type="text" class="form-control" id="inputMovie" placeholder="Enter movie name" name="movieName" [(ngModel)]="movieName">
       </div>
       <button type="submit" class="btn btn-primary mb-0 float-right" (click)="newMovie()">find version</button>
-    </form> -->
+    </form>
 
     <div class="btn-group ml-auto my-3" role="group" aria-label="toggles">
       <button type="button" class="btn btn-secondary btn-sm" [ngClass]="{'button-active': !hide90s}" (click)="toggle90s()">1990s</button>
@@ -20,8 +20,8 @@
   <div class="card mb-3 moviecard" [ngClass]="{'is-hidden': (hide00s && item.year.startsWith('20')) || (hide90s &&  item.year.startsWith('19')) }" *ngFor="let item of moviesDetails">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="./assets/images/{{item.imdbID}}.jpg" class="card-img p-2" alt="..."> <!--locally referenced poster images-->
-        <!-- <img src="{{item.posterUrl}}" class="card-img p-2" alt="..."> // hotlinked posterimage url part of the feature to change the moviename-->
+        <img *ngIf="item.title.includes(batman); else img_hotlink" src="./assets/images/{{item.imdbID}}.jpg" class="card-img p-2" alt="..."> <!-- locally referenced poster images // todo: ngIf condition needs more strict definition -->
+        <ng-template #img_hotlink><img src="{{item.posterUrl}}" class="card-img p-2" alt="..."></ng-template>  <!--  hotlinked posterimage url part of the feature to change the moviename -->
       </div>
       <div class="col-md-8">
         <div class="card-body">
