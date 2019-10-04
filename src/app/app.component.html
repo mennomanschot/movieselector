@@ -20,8 +20,8 @@
   <div class="card mb-3 moviecard" [ngClass]="{'is-hidden': (hide00s && item.year.startsWith('20')) || (hide90s &&  item.year.startsWith('19')) }" *ngFor="let item of moviesDetails">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img *ngIf="item.title.includes(batman); else img_hotlink" src="./assets/images/{{item.imdbID}}.jpg" class="card-img p-2" alt="..."> <!-- locally referenced poster images // todo: ngIf condition needs more strict definition -->
-        <ng-template #img_hotlink><img src="{{item.posterUrl}}" class="card-img p-2" alt="..."></ng-template>  <!--  hotlinked posterimage url part of the feature to change the moviename -->
+        <img *ngIf="item.title.includes('Batman'); else img_hotlink" src="./assets/images/{{item.imdbID}}.jpg" class="card-img p-2" alt="..."> <!-- locally referenced poster images // todo: ngIf condition needs more strict definition -->
+        <ng-template #img_hotlink><img src="{{item.posterUrl}}" class="card-img p-2" alt="..."></ng-template>  <!-- hotlinked posterimage url part of the feature to change the moviename-->
       </div>
       <div class="col-md-8">
         <div class="card-body">
