@@ -45,13 +45,12 @@ constructor(private http: HttpClient) {}
           this.moviesDetails.push(movieDetails); // push moviedetails in array for the view.
         });
       });
-      console.log(this.moviesDetails);
+      // console.log(this.moviesDetails);
     });
   }
 
   newMovie() {                         // work in progress: bind var movieName to inputform, and update movieSearch() with new urls
-    console.log(this.movieName);
-    console.log(this.movieUrl());
+    // console.log(this.movieName);
     this.moviesDetails = [];
     this.movieSearch();
   }
