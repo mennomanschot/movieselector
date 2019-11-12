@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MovieList } from './_models/movielist.model';
 import { Movie } from './_models/movie.model';
 import { MovieDetails } from './_models/movieDetails.model';
+import { Type } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,8 @@ export class AppComponent implements OnInit {
   moviesDetails = [];
   hide90s = false;
   hide00s = false;
-  movieID: any;
-  movieName: any = 'Batman';
+  movieID: '';
+  movieName = 'Batman';
 
   movieUrl = () => `http://www.omdbapi.com/?s=${this.movieName}&apikey=ee46de9e`;
 

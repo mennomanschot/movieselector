@@ -5,7 +5,7 @@ export class Movie {
     type: string;
     posterUrl: string;
 
-    constructor(movieSearch: any) {
+    constructor(movieSearch) {
         this.title = movieSearch.Title;
         this.year = movieSearch.Year;
         this.imdbID = movieSearch.imdbID;

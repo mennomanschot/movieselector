@@ -1,9 +1,9 @@
 export class MovieList {
-    Search: any;
+    Search: [];
     totalResults: string;
     response: string;
 
-    constructor(movieListResponse: any) {
+    constructor(movieListResponse) {
         this.Search = movieListResponse.Search;
         this.totalResults = movieListResponse.totalResults;
         this.response = movieListResponse.response;

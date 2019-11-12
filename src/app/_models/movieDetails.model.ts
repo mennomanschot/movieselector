@@ -9,7 +9,7 @@ export class MovieDetails {
     posterUrl: string;
 
 
-    constructor(details: any) {
+    constructor(details) {
         this.title = details.Title;
         this.description = details.Plot;
         this.year = details.Year;
